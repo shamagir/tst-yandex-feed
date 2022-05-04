@@ -206,7 +206,7 @@ class La_Yandex_Feed_Core {
 	
 	public function custom_request($query) {
         // var_dump($query->query_vars); die();
-	    
+
 	    if(isset($query->query_vars['yandex_feed']) && (in_array($query->query_vars['yandex_feed'], array('news', 'turbo')))) {
 	        $is_turbo = $query->query_vars['yandex_feed'] == 'turbo';
 			$pt = $this->get_supported_post_types();
@@ -222,6 +222,7 @@ class La_Yandex_Feed_Core {
 			}
 			
 			$query->query_vars['post_type'] = $pt;
+            $query->query_vars['post_status'] = 'publish';
 			
 			if($is_turbo) {
 			    $feed_items_limit_option = (int)get_option('layf_feed_items_limit', '');
